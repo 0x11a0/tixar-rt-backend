@@ -1,1 +1,1 @@
-web: node your-entry-file.js
+web: node index.js
