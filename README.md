@@ -12,7 +12,7 @@ Register a new user with their phone number, first name, and last name.
 
 Usage:
 
-Send a POST request to /register with the following JSON data in the request body:
+Send a `POST` request to `/register` with the following JSON data in the request body:
 ```
 json
 Copy code
@@ -29,7 +29,7 @@ Handle a Telegram bot callback for a user and associate their Telegram ID with t
 
 Usage:
 
-Send a POST request to /telebot/callback with the following JSON data in the request body:
+Send a `POST` request to `/telebot/callback` with the following JSON data in the request body:
 ```
 json
 Copy code
@@ -46,7 +46,7 @@ Request a one-time password (OTP) for user authentication.
 
 Usage:
 
-Send a POST request to /otp/request with the following JSON data in the request body:
+Send a `POST` request to `/otp/request` with the following JSON data in the request body:
 ```
 json
 Copy code
@@ -62,7 +62,7 @@ Authenticate a user using OTP and generate a token for access.
 
 Usage:
 
-Send a POST request to /login with the following JSON data in the request body:
+Send a `POST` request to `/login` with the following JSON data in the request body:
 ```
 json
 Copy code
@@ -79,7 +79,7 @@ Add a credit card to the user's account.
 
 Usage:
 
-Send a POST request to /user/card with the following JSON data in the request body:
+Send a `POST` request to `/user/card` with the following JSON data in the request body:
 ```
 json
 Copy code
@@ -99,7 +99,7 @@ Update the user's credit card information.
 
 Usage:
 
-Send a PUT request to /user/card with the following JSON data in the request body:
+Send a `PUT` request to `/user/card` with the following JSON data in the request body:
 ```
 json
 Copy code
@@ -119,7 +119,7 @@ Update the user's first name and last name.
 
 Usage:
 
-Send a PUT request to /user/name with the following JSON data in the request body:
+Send a `PUT` request to `/user/name` with the following JSON data in the request body:
 ```
 json
 Copy code
