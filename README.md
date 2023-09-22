@@ -79,6 +79,8 @@ Add a credit card to the user's account.
 
 Usage:
 
+Authorization Header required with token via `Bearer <token>`.
+
 Send a `POST` request to `/user/card` with the following JSON data in the request body:
 ```
 json
@@ -96,6 +98,8 @@ Note: Admin type is not required for this function.
 
 ## 6. updateCreditCard
 Update the user's credit card information.
+
+Authorization Header required with token via `Bearer <token>`.
 
 Usage:
 
@@ -116,6 +120,8 @@ Note: Admin type is not required for this function.
 
 ## 7. updateName
 Update the user's first name and last name.
+
+Authorization Header required with token via `Bearer <token>`.
 
 Usage:
 
