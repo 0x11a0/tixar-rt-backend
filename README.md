@@ -12,6 +12,11 @@ Register a new user with their phone number, first name, and last name.
 
 Usage:
 
+- **Method**: `POST`
+- **Endpoint**: `http://rt.tixar.sg/api/register`
+- **Body**:
+
+
 Send a `POST` request to `/register` with the following JSON data in the request body:
 ```json
 {
@@ -22,10 +27,14 @@ Send a `POST` request to `/register` with the following JSON data in the request
 ```
 Note: Admin type is not required for this function.
 
-## 2. telebotCallback
+## 2. telebotCallback (Telegram Binding)
 Handle a Telegram bot callback for a user and associate their Telegram ID with their account.
 
 Usage:
+
+- **Method**: `POST`
+- **Endpoint**: `http://rt.tixar.sg/api/telebot/callback`
+- **Body**:
 
 Send a `POST` request to `/telebot/callback` with the following JSON data in the request body:
 ```json
@@ -42,6 +51,10 @@ Request a one-time password (OTP) for user authentication.
 
 Usage:
 
+- **Method**: `POST`
+- **Endpoint**: `http://rt.tixar.sg/api/otp/request`
+- **Body**:
+
 Send a `POST` request to `/otp/request` with the following JSON data in the request body:
 ```json
 {
@@ -55,6 +68,10 @@ Note: Admin type is not required for this function.
 Authenticate a user using OTP and generate a token for access.
 
 Usage:
+
+- **Method**: `POST`
+- **Endpoint**: `http://rt.tixar.sg/api/login`
+- **Body**:
 
 Send a `POST` request to `/login` with the following JSON data in the request body:
 ```json
@@ -70,6 +87,12 @@ Note: Admin type is not required for this function.
 Add a credit card to the user's account.
 
 Usage:
+
+- **Method**: `POST`
+- **Endpoint**: `http://rt.tixar.sg/api/user/card`
+- **Headers**:
+    - **Authorization**: Bearer `<token>`
+- **Body**:
 
 Authorization Header required with token via `Bearer <token>`.
 
@@ -93,6 +116,12 @@ Authorization Header required with token via `Bearer <token>`.
 
 Usage:
 
+- **Method**: `PUT`
+- **Endpoint**: `http://rt.tixar.sg/api/user/card`
+- **Headers**:
+    - **Authorization**: Bearer `<token>`
+- **Body**:
+
 Send a `PUT` request to `/user/card` with the following JSON data in the request body:
 ```json
 {
@@ -113,6 +142,12 @@ Authorization Header required with token via `Bearer <token>`.
 
 Usage:
 
+- **Method**: `PUT`
+- **Endpoint**: `http://rt.tixar.sg/api/user/name`
+- **Headers**:
+    - **Authorization**: Bearer `<token>`
+- **Body**:
+
 Send a `PUT` request to `/user/name` with the following JSON data in the request body:
 ```json
 {
@@ -130,6 +165,11 @@ Authorization Header required with token via `Bearer <token>`.
 
 Usage:
 
+- **Method**: `GET`
+- **Endpoint**: `http://rt.tixar.sg/api/user`
+- **Headers**:
+    - **Authorization**: Bearer `<token>`
+
 Send a `GET` request to `/user`. 
 
 Response example:
@@ -138,6 +178,7 @@ Response example:
     "firstName": "John",
     "lastName": "Doe",
     "phone": "123456789",
+    "email": "john@doe.com",
     "card": {
         "cardName": "John Doe",
         "cardNumber": "**** **** 1346",
@@ -151,11 +192,17 @@ Response example:
 Note: Admin type is not required for this function.
 
 ## 9. updateProfile
-Update the user's profile (first name, last name, and phone number).
+Update the user's profile (first name, last name, phone number and email).
 
 Authorization Header required with token via `Bearer <token>`.
 
 Usage:
+
+- **Method**: `PUT`
+- **Endpoint**: `http://rt.tixar.sg/api/user`
+- **Headers**:
+    - **Authorization**: Bearer `<token>`
+- **Body**:
 
 Send a `PUT` request to `/user` with the JSON data you'd like to update in the request body. All fields are optional; only send the fields you'd like to update.
 
@@ -164,7 +211,8 @@ Example request body:
 {
     "firstName": "Jane",
     "lastName": "Doe",
-    "phone": "987654321"
+    "phone": "987654321",
+    "email": "doe@jane.com"
 }
 ```
 

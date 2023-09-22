@@ -142,7 +142,7 @@ const userController = {
         delete user.card.cardCvv;
       }
       
-      res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone, card: user.card});
+      res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone, email: user.email, card: user.card});
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -150,7 +150,7 @@ const userController = {
 
   updateProfile: async (req, res) => {
     try {
-      const { firstName, lastName, phone } = req.body;
+      const { firstName, lastName, phone, email } = req.body;
       const user = await User.findById(req.user._id);
 
       if (!user) {
@@ -160,6 +160,7 @@ const userController = {
       if (firstName) user.firstName = firstName;
       if (lastName) user.lastName = lastName;
       if (phone) user.phone = phone;
+      if (email) user.email = email;
       
       await user.save();
       
@@ -171,7 +172,7 @@ const userController = {
         delete user.card.cardCvv;
       }
       
-      res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone});
+      res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone, email: user.email});
 
     } catch (err) {
       res.status(500).json({ message: err.message });
