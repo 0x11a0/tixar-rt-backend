@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   type: String,
-  customer: {
+  card: {
     cardName: String,
     cardNumber: String,
     cardExpiryMonth: String,

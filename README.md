@@ -13,9 +13,7 @@ Register a new user with their phone number, first name, and last name.
 Usage:
 
 Send a `POST` request to `/register` with the following JSON data in the request body:
-```
-json
-Copy code
+```json
 {
     "phone": "1234567890",
     "firstName": "John",
@@ -30,9 +28,7 @@ Handle a Telegram bot callback for a user and associate their Telegram ID with t
 Usage:
 
 Send a `POST` request to `/telebot/callback` with the following JSON data in the request body:
-```
-json
-Copy code
+```json
 {
     "contact": "1234567890",
     "telegramId": "1234567890",
@@ -47,9 +43,7 @@ Request a one-time password (OTP) for user authentication.
 Usage:
 
 Send a `POST` request to `/otp/request` with the following JSON data in the request body:
-```
-json
-Copy code
+```json
 {
     "phone": "1234567890"
 }
@@ -63,9 +57,7 @@ Authenticate a user using OTP and generate a token for access.
 Usage:
 
 Send a `POST` request to `/login` with the following JSON data in the request body:
-```
-json
-Copy code
+```json
 {
     "phone": "1234567890",
     "otp": "123456"
@@ -82,9 +74,7 @@ Usage:
 Authorization Header required with token via `Bearer <token>`.
 
 Send a `POST` request to `/user/card` with the following JSON data in the request body:
-```
-json
-Copy code
+```json
 {
     "customer": {
         "cardNumber": "1234 5678 9012 3456",
@@ -104,9 +94,7 @@ Authorization Header required with token via `Bearer <token>`.
 Usage:
 
 Send a `PUT` request to `/user/card` with the following JSON data in the request body:
-```
-json
-Copy code
+```json
 {
     "customer": {
         "cardNumber": "1111 2222 3333 4444",
@@ -126,12 +114,57 @@ Authorization Header required with token via `Bearer <token>`.
 Usage:
 
 Send a `PUT` request to `/user/name` with the following JSON data in the request body:
-```
-json
-Copy code
+```json
 {
     "firstName": "Alice",
     "lastName": "Smith"
+}
+```
+
+Note: Admin type is not required for this function.
+
+## 8. getProfile
+Retrieve the user's profile information.
+
+Authorization Header required with token via `Bearer <token>`.
+
+Usage:
+
+Send a `GET` request to `/user`. 
+
+Response example:
+```json
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "phone": "123456789",
+    "card": {
+        "cardName": "John Doe",
+        "cardNumber": "**** **** 1346",
+        "cardExpiryMonth": "01",
+        "cardExpiryYear": "2030",
+        "cardCvv": "***"
+    }
+}
+```
+
+Note: Admin type is not required for this function.
+
+## 9. updateProfile
+Update the user's profile (first name, last name, and phone number).
+
+Authorization Header required with token via `Bearer <token>`.
+
+Usage:
+
+Send a `PUT` request to `/user` with the JSON data you'd like to update in the request body. All fields are optional; only send the fields you'd like to update.
+
+Example request body:
+```json
+{
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "phone": "987654321"
 }
 ```
 

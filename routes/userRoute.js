@@ -30,4 +30,10 @@ router.put('/user/card', userController.updateCreditCard); // Using PUT since it
 // Update user name (firstName & lastName)
 router.put('/user/name', userController.updateName); // Using PUT since it's an update operation
 
+// Get User Profile
+router.get('/user', userController.getProfile);
+
+// Update User Profile
+router.put('/user', userController.updateProfile); // USING put since it's an update operation
+
 module.exports = router;

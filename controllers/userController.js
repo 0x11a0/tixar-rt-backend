@@ -126,16 +126,68 @@ const userController = {
     }
   },
 
-  addCreditCard: async (req, res) => {
+  getProfile: async (req, res) => {
     try {
-      const { customer } = req.body;
       const user = await User.findById(req.user._id);
 
       if (!user) {
         return res.status(404).json({ message: "User not found!" });
       }
 
-      user.customer = customer;
+      if (user.card.cardNumber) {
+        const number = user.card.cardNumber;
+        const lastFour = number.substring(number.length - 4);
+        user.card.cardNumber = "**** **** **** " + lastFour;
+        user.card.cardCvv = "***";
+        delete user.card.cardCvv;
+      }
+      
+      res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone, card: user.card});
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
+
+  updateProfile: async (req, res) => {
+    try {
+      const { firstName, lastName, phone } = req.body;
+      const user = await User.findById(req.user._id);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found!" });
+      }
+
+      if (firstName) user.firstName = firstName;
+      if (lastName) user.lastName = lastName;
+      if (phone) user.phone = phone;
+      
+      await user.save();
+      
+      if (user.card.cardNumber) {
+        const number = user.card.cardNumber;
+        const lastFour = number.substring(number.length - 4);
+        user.card.cardNumber = "**** **** **** " + lastFour;
+        user.card.cardCvv = "***";
+        delete user.card.cardCvv;
+      }
+      
+      res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone});
+
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
+
+  addCreditCard: async (req, res) => {
+    try {
+      const { card } = req.body;
+      const user = await User.findById(req.user._id);
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found!" });
+      }
+
+      user.card = card;
       await user.save();
 
       res.status(200).json({ message: "Credit card added successfully!" });
@@ -146,14 +198,14 @@ const userController = {
 
   updateCreditCard: async (req, res) => {
     try {
-      const { customer } = req.body;
+      const { card } = req.body;
       const user = await User.findById(req.user._id);
 
       if (!user) {
         return res.status(404).json({ message: "User not found!" });
       }
 
-      user.customer = { ...user.customer, ...customer };
+      user.card = { ...user.card, ...card };
       await user.save();
 
       res.status(200).json({ message: "Credit card updated successfully!" });
