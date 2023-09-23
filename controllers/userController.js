@@ -8,7 +8,7 @@ const userController = {
 
   register: async (req, res) => {
     try {
-      const { phone, firstName, lastName } = req.body;
+      const { phone, firstName, lastName, email } = req.body;
       const user = await User.findOne({ phone });
 
       if (user) {
@@ -18,7 +18,8 @@ const userController = {
       const newUser = new User({ 
         phone: phone,
         firstName: firstName,
-        lastName: lastName
+        lastName: lastName,
+        email: email
         });
 
       await newUser.save();
