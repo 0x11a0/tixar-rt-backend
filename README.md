@@ -47,7 +47,7 @@ Send a `POST` request to `/telebot/callback` with the following JSON data in the
 Note: Admin type is not required for this function. It requires a secret token for authentication.
 
 ## 3. requestOtp
-Request a one-time password (OTP) for user authentication.
+Request a one-time password (OTP) for user authentication. OTP last for 60 seconds before expiring.
 
 Usage:
 
