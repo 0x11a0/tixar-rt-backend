@@ -185,7 +185,8 @@ Response example:
         "cardExpiryMonth": "01",
         "cardExpiryYear": "2030",
         "cardCvv": "***"
-    }
+    },
+    "type": "standard" // or "admin"
 }
 ```
 
