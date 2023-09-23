@@ -22,7 +22,8 @@ Send a `POST` request to `/register` with the following JSON data in the request
 {
     "phone": "1234567890",
     "firstName": "John",
-    "lastName": "Doe"
+    "lastName": "Doe",
+    "email": "john@doe.com"
 }
 ```
 Note: Admin type is not required for this function.
