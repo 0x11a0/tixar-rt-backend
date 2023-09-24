@@ -38,7 +38,9 @@ const userController = {
             return res.status(404).json({ message: "Error" });
         }
 
-        const user = await User.findOne({ phone: contact });
+        let newContract = contact.replace(/\+/g, '');
+
+        const user = await User.findOne({ phone: newContract });
 
         if (!user) {
             return res.status(404).json({ message: "User not found!" });

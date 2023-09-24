@@ -49,7 +49,7 @@ userSchema.methods.compareOtp = async function(enteredOtp) {
 
 
 userSchema.methods.generateToken = function() {
-    return jwt.sign({'id': this._id, 'type': this.type}, process.env.JWT_SECRET, {
+    return jwt.sign({'id': this._id, 'type': this.type, 'phone': this.phone, 'name': this.firstName + " " + this.lastName}, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRY
     });
 }
