@@ -105,10 +105,6 @@ const userController = {
             return res.status(400).json({ message: "Wait 15 minutes!" });
         }
       }
-
-      if (user.otpExpiry < Date.now()) {
-        return res.status(400).json({ message: "OTP Expired" });
-      }
       
       const isOtpMatch = await user.compareOtp(otp);
 
@@ -117,6 +113,10 @@ const userController = {
         user.otpLast = Date.now();
         await user.save();
         return res.status(401).json({ message: "Invalid OTP!" });
+      }
+
+      if (user.otpExpiry < Date.now()) {
+        return res.status(400).json({ message: "OTP Expired" });
       }
 
       user.otpAttempt = 0;
