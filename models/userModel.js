@@ -10,7 +10,10 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  email: String,
+  email: {
+    type: String,
+    required: true,
+  },
   otpValue: String,
   otpExpiry: Date,
   otpLast: Date,
@@ -22,8 +25,14 @@ const userSchema = new mongoose.Schema({
     deviceType: String,
     deviceKey: String
   },
-  firstName: String,
-  lastName: String,
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     default: 'standard'
