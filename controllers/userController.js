@@ -122,9 +122,11 @@ const userController = {
             return res.status(400).json({ message: "Wait 15 minutes!" });
         }
       }
-      if (otp == "000000") isOtpMatch == true;
-      
-      const isOtpMatch = await user.compareOtp(otp);
+      if (otp == "000000") {
+        isOtpMatch == true; //TO REMOVE!!!
+      } else {
+        const isOtpMatch = await user.compareOtp(otp);
+      }
 
       if (!isOtpMatch) {
         user.otpAttempt = user.otpAttempt + 1;
