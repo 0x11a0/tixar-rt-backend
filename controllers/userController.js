@@ -89,6 +89,7 @@ const userController = {
     }
   },
 
+  // TO REMOVE BYPASSLOGIN LATER
   bypassLogin: async (req, res) => {
     try {
       const { phone } = req.body;
@@ -122,10 +123,14 @@ const userController = {
             return res.status(400).json({ message: "Wait 15 minutes!" });
         }
       }
+
+      isOtpMatch = false;
+      
       if (otp == "000000") {
-        isOtpMatch == true; //TO REMOVE!!!
+        isOtpMatch = true; //TO REMOVE!!!
       } else {
-        const isOtpMatch = await user.compareOtp(otp);
+        isOtpMatch = await user.compareOtp(otp); // REPLACE WITH BELOW ONCE DONE
+        //const isOtpMatch = await user.compareOtp(otp);`
       }
 
       if (!isOtpMatch) {
