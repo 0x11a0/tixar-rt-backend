@@ -8,6 +8,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
+
 const db = mongoose.connection;
 
 // Handle database connection errors
