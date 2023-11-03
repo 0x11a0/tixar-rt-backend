@@ -5,7 +5,7 @@ const eventController = {
     // 1) Event Operations:
     getAllEvents: async (req, res) => {
         try {
-            const events = await Event.find();
+            const events = await Event.find().sort({ "sessions.start":1});
             res.status(200).json(events);
         } catch (err) {
             res.status(500).json({ message: err.message });

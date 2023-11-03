@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -21,8 +22,9 @@ app.use(apiLimiter);
 app.use(bodyParser.json());
 
 // Define routes
-app.use('/api', userRoutes); 
 app.use('/api/event', eventRoutes);
+app.use('/api', userRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -31,3 +33,4 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app; // Export the Express app
+

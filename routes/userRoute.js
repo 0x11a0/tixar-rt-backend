@@ -17,7 +17,7 @@ router.post('/telebot/callback', userController.telebotCallback);
 router.post('/login', userController.login);
 
 // TEMP BYPASS LOGIN
-router.post('/bypass', userController.bypassLogin);
+router.post('/bypass', userController.bypassLogin); // REMOVE WHEN DONE
 
 // PRIVATE ROUTE
 router.use(isAuthenticated);
