@@ -43,7 +43,8 @@ const userSchema = new mongoose.Schema({
     cardExpiryMonth: String,
     cardExpiryYear: String,
     cardCvv: String
-  }
+  },
+  eWalletBalance: Number
 });
 
 userSchema.pre("save", async function(next) {
