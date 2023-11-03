@@ -12,7 +12,7 @@ const eventSchema = new mongoose.Schema({
         type: String,
     },
     concertImage: {
-        type: Buffer,
+        type: String,
     },
     categories: [String],
     salesRound: [{
