@@ -21,8 +21,9 @@ app.use(apiLimiter);
 app.use(bodyParser.json());
 
 // Define routes
-app.use('/api', userRoutes); 
 app.use('/api/event', eventRoutes);
+app.use('/api', userRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

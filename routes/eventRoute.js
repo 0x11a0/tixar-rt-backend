@@ -3,12 +3,18 @@ const eventController = require('../controllers/eventController');  // Adjust th
 const router = express.Router();
 const {isAuthenticated} = require('../middlewares/auth');
 
+
+// PUBLIC ROUTE
+
+// 1) Event Operations:
+router.route('/')
+    .get(eventController.getAllEvents);
+
 // PRIVATE ROUTE
 router.use(isAuthenticated);
 
 // 1) Event Operations:
 router.route('/')
-    .get(eventController.getAllEvents)
     .post(eventController.createEvent);
 
 router.route('/:id')
