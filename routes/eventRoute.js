@@ -1,3 +1,4 @@
+
 const express = require('express');
 const eventController = require('../controllers/eventController');  // Adjust the path as necessary
 const router = express.Router();
