@@ -15,6 +15,11 @@ const transactionController = {
               salesRoundID,
               items
             } = req.body;
+
+            const user = req.user._id;
+            const userBalance = req.user.eWalletBalance;
+            if (!userBalance) return res.status(400).json({message: "User has no balance"});
+            console.log(userBalance);
         
             // Find the event based on eventID
             const event = await Event.findById(eventID);
@@ -38,6 +43,8 @@ const transactionController = {
               }
             }
         
+            // Check if user has enough balance
+            if (userBalance < totalValue) return res.status(400).json({message: "Not enough balance"});
             // Create a new transaction with the calculated total value
             const newTransaction = new Transaction({
               type,
@@ -46,6 +53,10 @@ const transactionController = {
             });
         
             await newTransaction.save();
+
+            // Deduct from user's eWallet balance
+            const newBalance = userBalance - totalValue;
+            await User.findByIdAndUpdate(user, { eWalletBalance: newBalance });
         
             return res.status(201).json(newTransaction);
           } catch (err) {
@@ -63,6 +74,29 @@ const transactionController = {
             res.status(200).json({message: "Transaction deleted"});
         } catch (err) {
             res.status(500).json({ message: err.message});
+        }
+    },
+
+    //eWalletTopUp
+    topUpEWalletBalance: async (req, res) => {
+        try {
+
+            const type = req.body.type;
+            if (!(type == "eWalletTopUp")) return res.status(400).json({message: "Wrong type"});
+
+            const user = req.user._id;
+            if (!user) return res.status(404).json({message: "User not found!"});
+
+            const addEWalletBalanace = parseInt(req.body.value);
+            let eWalletBalance = parseInt(req.user.eWalletBalance);
+            eWalletBalance += addEWalletBalanace;
+
+            const eWalletTransaction = new Transaction(req.body);
+            await User.findByIdAndUpdate(user, { eWalletBalance: eWalletBalance });
+            await eWalletTransaction.save();
+            return res.status(201).json({message: "Added $" + addEWalletBalanace + " to your account!"});
+        } catch (err) {
+            res.status(500).json({message: err.message});
         }
     }
 };

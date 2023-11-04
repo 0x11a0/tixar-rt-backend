@@ -11,6 +11,9 @@ router.use(isAuthenticated);
 router.route('/')
     .post(transactionController.purchaseTicketTransaction);
 
+router.route('/topUpEWallet')
+    .post(transactionController.topUpEWalletBalance);
+
 router.route('/:id')
     .delete(transactionController.deleteTicketTransaction);
 

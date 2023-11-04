@@ -44,7 +44,10 @@ const userSchema = new mongoose.Schema({
     cardExpiryYear: String,
     cardCvv: String
   },
-  eWalletBalance: Number
+  eWalletBalance: {
+    type: Number,
+    default: '0'
+  }
 });
 
 userSchema.pre("save", async function(next) {
