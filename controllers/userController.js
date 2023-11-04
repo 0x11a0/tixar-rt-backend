@@ -261,7 +261,21 @@ const userController = {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
+  },
+
+  getEWalletBalance: async (req, res) => {
+    try {
+      const user = await User.findById(req.user._id);
+
+      if (!user) return res.status(404).json({ message: "User not found!" });
+      const eWalletBalance = user.eWalletBalance;
+
+      res.status(200).json({ message: eWalletBalance });
+    } catch (err) {
+      res.status(500).json({message: err.message});
+    }
   }
+
 };
 
 module.exports = userController;
