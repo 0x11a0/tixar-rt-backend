@@ -8,6 +8,9 @@ const eventSchema = new mongoose.Schema({
     artistName: {
         type: String,
     },
+    artistImage: {
+        type: String
+    },
     concertDescription: {
         type: String,
     },
