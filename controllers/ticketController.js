@@ -1,29 +1,42 @@
 const Ticket = require('../models/ticketModel');
 const Event = require('../models/eventModel');
+const Transaction = require('../models/transactionModel');
 
 const ticketController = {
 
   generateTicket: async (req, res) => {
     try {
-      const { type, transactionID, priceId, salesRoundID, eventId } = req.body;
+      const { transactionId, sessionId, eventId, capacityId, category} = req.body;
 
       const event = await Event.findById(eventId);
-      const price = event.salesRound.id(salesRoundID).prices.find(price => price._id == priceID);
 
-      res.status(201).json(price);
+      if (!event) {
+        return res.status(404).json({ message: 'Event not found' });
+      }
 
-      // const newTicket = new Ticket({ 
-      //   datePurchased : Date.now(),
-      //   type: type,
-      //   transaction: transactionId,
-      //   price: price
-      //   });
+      const transaction = await Transaction.findById(transactionId);
 
-      // await newTicket.save();
+      if (!transaction) {
+        return res.status(404).json({ message: 'Transaction not found' });
+      }
 
-      // res.status(201).json(newTicket);
+      const session = event.sessions.id(sessionId);
+
+
+      const newTicket = new Ticket({ 
+        datePurchased : Date.now(),
+        type: category,
+        transaction: transactionId,
+        capacity: capacityId,
+        session: sessionId,
+        });
+
+
+      await newTicket.save();
+
+      return res.status(201).json(newTicket);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      return res.status(500).json({ message: err.message });
     }
   }
 }

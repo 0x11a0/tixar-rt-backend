@@ -8,15 +8,12 @@ const ticketSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Event'
   },
-  session: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Session'
-  },
+  session: String,
   transaction: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Transaction'
   },
-  price: Number
+  capacity: String
 })
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
