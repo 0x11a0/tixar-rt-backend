@@ -104,13 +104,14 @@ const transactionController = {
           const type = req.body.type;
           if (!(type == "eWalletWithdraw")) return res.status(400).json({message: "Wrong type"});
 
-          const user = req.body.user;
+          const user = req.user._id;
+          if (!user) return res.status(404).json({message: "User not found!"});
 
           const withdrawEWalletValue = parseInt(req.body.value);
           let eWalletBalance = parseInt(req.user.eWalletBalance);
 
           // Check if user has enough to withdraw
-          let eWalletRemainder = eWalletBalance - withdrawEWalletValue; 
+          let eWalletRemainder = eWalletBalance - withdrawEWalletValue;
           // if user's balance < the value the user wants to draw && the remainder after withdrawing is < 0
           if (!(eWalletBalance >= withdrawEWalletValue && eWalletRemainder >= 0)) return res.status(400).json({message: "Not enough balance"});
 
