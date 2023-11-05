@@ -37,7 +37,4 @@ router.get('/user', userController.getProfile);
 // Update User Profile
 router.put('/user', userController.updateProfile); // USING put since it's an update operation
 
-// Get User eWallet Balance
-router.get('/user/eWalletBalance', userController.getEWalletBalance);
-
 module.exports = router;
