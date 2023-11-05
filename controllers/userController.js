@@ -8,7 +8,7 @@ const userController = {
 
   register: async (req, res) => {
     try {
-      const { phone, firstName, lastName, email } = req.body;
+      const { phone, firstName, lastName, email, type } = req.body;
       const user = await User.findOne({ phone });
 
       if (user) {
@@ -20,6 +20,7 @@ const userController = {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        type: type,
         eWalletBalance: 0
         });
 
