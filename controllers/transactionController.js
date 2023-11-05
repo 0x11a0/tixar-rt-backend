@@ -19,7 +19,6 @@ const transactionController = {
             const user = req.user._id;
             const userBalance = req.user.eWalletBalance;
             if (!userBalance) return res.status(400).json({message: "User has no balance"});
-            console.log(userBalance);
         
             // Find the event based on eventID
             const event = await Event.findById(eventID);
@@ -87,18 +86,43 @@ const transactionController = {
             const user = req.user._id;
             if (!user) return res.status(404).json({message: "User not found!"});
 
-            const addEWalletBalanace = parseInt(req.body.value);
+            const addEWalletValue = parseInt(req.body.value);
             let eWalletBalance = parseInt(req.user.eWalletBalance);
-            eWalletBalance += addEWalletBalanace;
+            eWalletBalance += addEWalletValue;
 
             const eWalletTransaction = new Transaction(req.body);
             await User.findByIdAndUpdate(user, { eWalletBalance: eWalletBalance });
             await eWalletTransaction.save();
-            return res.status(201).json({message: "Added $" + addEWalletBalanace + " to your account!"});
+            return res.status(201).json({message: "Added $" + addEWalletValue + " to your account!"});
         } catch (err) {
             res.status(500).json({message: err.message});
         }
-    }
+    }, 
+
+    withdrawEWalletBalance: async (req, res) => {
+        try {
+          const type = req.body.type;
+          if (!(type == "eWalletWithdraw")) return res.status(400).json({message: "Wrong type"});
+
+          const user = req.body.user;
+
+          const withdrawEWalletValue = parseInt(req.body.value);
+          let eWalletBalance = parseInt(req.user.eWalletBalance);
+
+          // Check if user has enough to withdraw
+          let eWalletRemainder = eWalletBalance - withdrawEWalletValue; 
+          // if user's balance < the value the user wants to draw && the remainder after withdrawing is < 0
+          if (!(eWalletBalance >= withdrawEWalletValue && eWalletRemainder >= 0)) return res.status(400).json({message: "Not enough balance"});
+
+          const eWalletTransaction = new Transaction(req.body);
+          await User.findByIdAndUpdate(user, { eWalletBalance: eWalletRemainder });
+          await eWalletTransaction.save();
+          return res.status(201).json({message: "Withdrawn $" + withdrawEWalletValue + " from your account!"});
+
+        } catch (err) {
+          res.status(500).json({message: err.message});
+        }
+    },
 };
 
 module.exports = transactionController;

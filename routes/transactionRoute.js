@@ -8,11 +8,14 @@ const { isAuthenticated } = require('../middlewares/auth');
 router.use(isAuthenticated);
 
 // Purchase Ticket
-router.route('/')
+router.route('/purchaseTicket')
     .post(transactionController.purchaseTicketTransaction);
 
 router.route('/topUpEWallet')
     .post(transactionController.topUpEWalletBalance);
+
+router.route('/withdrawEWallet')
+    .post(transactionController.withdrawEWalletBalance);
 
 router.route('/:id')
     .delete(transactionController.deleteTicketTransaction);
