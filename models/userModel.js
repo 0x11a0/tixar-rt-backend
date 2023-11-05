@@ -43,6 +43,10 @@ const userSchema = new mongoose.Schema({
     cardExpiryMonth: String,
     cardExpiryYear: String,
     cardCvv: String
+  },
+  eWalletBalance: {
+    type: Number,
+    default: '0'
   }
 });
 

@@ -19,7 +19,8 @@ const userController = {
         phone: phone,
         firstName: firstName,
         lastName: lastName,
-        email: email
+        email: email,
+        eWalletBalance: 0
         });
 
       await newUser.save();
@@ -170,7 +171,7 @@ const userController = {
         delete user.card.cardCvv;
       }
       
-      res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone, email: user.email, card: user.card, 'type': user.type});
+      res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone, email: user.email, card: user.card, 'type': user.type, eWalletBalance: user.eWalletBalance});
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -260,7 +261,7 @@ const userController = {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
-  }
+  },
 };
 
 module.exports = userController;

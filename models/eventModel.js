@@ -8,9 +8,19 @@ const eventSchema = new mongoose.Schema({
     artistName: {
         type: String,
     },
+    artistImage: {
+        type: String
+    },
+    concertDescription: {
+        type: String,
+    },
+    concertImage: {
+        type: String,
+    },
+    categories: [String],
     salesRound: [{
         title: String,
-        type: String,
+        roundType: String,
         start: Date,
         end: Date,
         allocation: Number,
@@ -24,7 +34,7 @@ const eventSchema = new mongoose.Schema({
             venue: String,
             start: Date,
             end: Date,
-            categoryCapacity: [{
+            capacity: [{
                 category: String,
                 capacity: Number,
                 available: Number

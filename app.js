@@ -5,6 +5,7 @@ const app = express();
 const rateLimit = require('express-rate-limit');
 const userRoutes = require('./routes/userRoute');
 const eventRoutes = require('./routes/eventRoute');
+const transactionRoutes = require('./routes/transactionRoute');
 const { blockIPs } = require('./middlewares/ipFilter');
 
 app.use(blockIPs);
@@ -22,6 +23,7 @@ app.use(apiLimiter);
 app.use(bodyParser.json());
 
 // Define routes
+app.use('/api/transaction', transactionRoutes);
 app.use('/api/event', eventRoutes);
 app.use('/api', userRoutes);
 
