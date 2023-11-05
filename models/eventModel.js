@@ -17,7 +17,7 @@ const eventSchema = new mongoose.Schema({
     categories: [String],
     salesRound: [{
         title: String,
-        type: String,
+        roundType: String,
         start: Date,
         end: Date,
         allocation: Number,
