@@ -27,7 +27,37 @@ const eventController = {
             // ADMIN ONLY
             if (req.user.type != "admin") res.status(403).json({message: "restricted"});
 
-            const newEvent = new Event(req.body);
+            var artistImage = null;
+            var concertImage = null;
+            if (req.files) {
+                if (req.files['artistImage']) {
+                  artistImage = req.files['artistImage'][0].location;
+                }
+          
+                if (req.files['concertImage']) {
+                  concertImage = req.files['concertImage'][0].location;
+                }
+              }
+
+            
+            const name = req.body.name
+            const artistName = req.body.artistName
+            const concertDescription = req.body.concertDescription
+            const category = req.body.category
+            const salesRound = req.body.salesRound
+            const sessions = req.body.sessions
+
+            const newEvent = new Event(
+                {
+                    "name": name,
+                    "artistName": artistName,
+                    "artistImage": artistImage,
+                    "concertDescription": concertDescription,
+                    "concertImage": concertImage,
+                    "category": category,
+                    "salesRound": salesRound,
+                    "sessions": sessions,
+                });
             await newEvent.save();
             res.status(201).json(newEvent);
         } catch (err) {
@@ -39,8 +69,41 @@ const eventController = {
         try {
             // ADMIN ONLY
             if (req.user.type != "admin") res.status(403).json({message: "restricted"});
-            
-            const updatedEvent = await Event.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+            var artistImage = null;
+            var concertImage = null;
+            if (req.files) {
+                if (req.files['artistImage']) {
+                  artistImage = req.files['artistImage'][0].location;
+                }
+          
+                if (req.files['concertImage']) {
+                  concertImage = req.files['concertImage'][0].location;
+                }
+            }
+
+            console.log(artistImage);
+            console.log(concertImage);
+              const name = req.body.name
+              const artistName = req.body.artistName
+              const concertDescription = req.body.concertDescription
+              const category = req.body.category
+              const salesRound = req.body.salesRound
+              const sessions = req.body.sessions
+  
+              const updateEvent = 
+                  {
+                      "name": name,
+                      "artistName": artistName,
+                      "artistImage": artistImage,
+                      "concertDescription": concertDescription,
+                      "concertImage": concertImage,
+                      "category": category,
+                      "salesRound": salesRound,
+                      "sessions": sessions,
+                  };
+
+            const updatedEvent = await Event.findByIdAndUpdate(req.params.id, updateEvent, { new: true });
             if (!updatedEvent) return res.status(404).json({ message: "Event not found" });
             res.status(200).json(updatedEvent);
         } catch (err) {
