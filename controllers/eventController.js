@@ -46,7 +46,7 @@ const eventController = {
             const categories = req.body.categories;
             const salesRound = req.body.salesRound;
             const sessions = req.body.sessions;
-            console.log(categories);
+            const vfThreshold = req.body.vfThreshold;
 
             const newEvent = new Event(
                 {
@@ -58,6 +58,7 @@ const eventController = {
                     "categories": categories,
                     "salesRound": salesRound,
                     "sessions": sessions,
+                    "vfThreshold": vfThreshold,
                 });
             await newEvent.save();
             res.status(201).json(newEvent);
@@ -89,6 +90,7 @@ const eventController = {
               const categories = req.body.categories;
               const salesRound = req.body.salesRound;
               const sessions = req.body.sessions;
+              const vfThreshold = req.body.vfThreshold;
   
               const updateEvent = 
                   {
@@ -100,8 +102,8 @@ const eventController = {
                       "categories": categories,
                       "salesRound": salesRound,
                       "sessions": sessions,
+                      "vfThreshold": vfThreshold,
                   };
-                  console.log(updateEvent);
             const updatedEvent = await Event.findByIdAndUpdate(req.params.id, updateEvent, { new: true });
             if (!updatedEvent) return res.status(404).json({ message: "Event not found" });
             res.status(200).json(updatedEvent);
