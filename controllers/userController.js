@@ -163,14 +163,6 @@ const userController = {
       if (!user) {
         return res.status(404).json({ message: "User not found!" });
       }
-
-      if (user.card.cardNumber) {
-        const number = user.card.cardNumber;
-        const lastFour = number.substring(number.length - 4);
-        user.card.cardNumber = "**** **** **** " + lastFour;
-        user.card.cardCvv = "***";
-        delete user.card.cardCvv;
-      }
       
       res.status(200).json({ firstName: user.firstName, lastName: user.lastName, phone: user.phone, email: user.email, card: user.card, 'type': user.type, eWalletBalance: user.eWalletBalance});
     } catch (err) {
