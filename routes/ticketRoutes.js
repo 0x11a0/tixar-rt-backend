@@ -5,13 +5,15 @@ const router = express.Router();
 const {isAuthenticated} = require('../middlewares/auth');
 
 
-// PUBLIC ROUTE
+// PRIVATE ROUTE
+router.use(isAuthenticated);
 
-// 1) Event Operations:
+// 1) Generate Operations:
 router.route('/generate')
     .post(ticketController.generateTicket);
 
-// PRIVATE ROUTE
-router.use(isAuthenticated);
+// 2) Get Tickets:
+router.route('/')
+    .get(ticketController.getUserTickets);
 
 module.exports = router;

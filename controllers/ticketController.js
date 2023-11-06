@@ -29,6 +29,7 @@ const ticketController = {
         transaction: transactionId,
         capacity: capacityId,
         session: sessionId,
+        user: req.user._id
         });
 
 
@@ -37,6 +38,16 @@ const ticketController = {
       return res.status(201).json(newTicket);
     } catch (err) {
       return res.status(500).json({ message: err.message });
+    }
+  },
+
+  getUserTickets: async(req, res) => {
+    try {
+      const tickets = await Ticket.find({user: req.user._id});
+
+      return res.status(200).json(tickets);
+    } catch (err) {
+      return res.status(500).json({message: err.message});
     }
   }
 }
