@@ -40,12 +40,13 @@ const eventController = {
               }
 
             
-            const name = req.body.name
-            const artistName = req.body.artistName
-            const concertDescription = req.body.concertDescription
-            const category = req.body.category
-            const salesRound = req.body.salesRound
-            const sessions = req.body.sessions
+            const name = req.body.name;
+            const artistName = req.body.artistName;
+            const concertDescription = req.body.concertDescription;
+            const categories = req.body.categories;
+            const salesRound = req.body.salesRound;
+            const sessions = req.body.sessions;
+            console.log(categories);
 
             const newEvent = new Event(
                 {
@@ -54,7 +55,7 @@ const eventController = {
                     "artistImage": artistImage,
                     "concertDescription": concertDescription,
                     "concertImage": concertImage,
-                    "category": category,
+                    "categories": categories,
                     "salesRound": salesRound,
                     "sessions": sessions,
                 });
@@ -82,14 +83,12 @@ const eventController = {
                 }
             }
 
-            console.log(artistImage);
-            console.log(concertImage);
-              const name = req.body.name
-              const artistName = req.body.artistName
-              const concertDescription = req.body.concertDescription
-              const category = req.body.category
-              const salesRound = req.body.salesRound
-              const sessions = req.body.sessions
+              const name = req.body.name;
+              const artistName = req.body.artistName;
+              const concertDescription = req.body.concertDescription;
+              const categories = req.body.categories;
+              const salesRound = req.body.salesRound;
+              const sessions = req.body.sessions;
   
               const updateEvent = 
                   {
@@ -98,11 +97,11 @@ const eventController = {
                       "artistImage": artistImage,
                       "concertDescription": concertDescription,
                       "concertImage": concertImage,
-                      "category": category,
+                      "categories": categories,
                       "salesRound": salesRound,
                       "sessions": sessions,
                   };
-
+                  console.log(updateEvent);
             const updatedEvent = await Event.findByIdAndUpdate(req.params.id, updateEvent, { new: true });
             if (!updatedEvent) return res.status(404).json({ message: "Event not found" });
             res.status(200).json(updatedEvent);
