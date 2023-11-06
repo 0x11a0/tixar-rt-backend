@@ -13,7 +13,11 @@ const ticketSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Transaction'
   },
-  capacity: String
+  capacity: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
