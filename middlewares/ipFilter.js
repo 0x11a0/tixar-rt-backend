@@ -1,4 +1,4 @@
-const blockedIPs = ['128.106.241.163']; 
+const blockedIPs = []; 
 
 exports.blockIPs = (req, res, next) => {
     const clientIP = req.ip; // or req.connection.remoteAddress for older Express versions
