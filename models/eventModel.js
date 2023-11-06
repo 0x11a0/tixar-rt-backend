@@ -18,6 +18,7 @@ const eventSchema = new mongoose.Schema({
         type: String,
     },
     categories: [String],
+    vfThreshold: Number,
     salesRound: [{
         title: String,
         roundType: String,
