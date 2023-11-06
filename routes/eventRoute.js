@@ -3,6 +3,7 @@ const express = require('express');
 const eventController = require('../controllers/eventController');  // Adjust the path as necessary
 const router = express.Router();
 const {isAuthenticated} = require('../middlewares/auth');
+const upload = require('../middlewares/uploadMiddleware');
 
 
 // PUBLIC ROUTE
@@ -16,11 +17,15 @@ router.use(isAuthenticated);
 
 // 1) Event Operations:
 router.route('/')
-    .post(eventController.createEvent);
+    .post(upload.fields([
+        { name: 'artistImage', maxCount: 1 },
+        { name: 'concertImage', maxCount: 1 }]),eventController.createEvent);
 
 router.route('/:id')
     .get(eventController.getEventById)
-    .put(eventController.updateEvent)
+    .put(upload.fields([
+        { name: 'artistImage', maxCount: 1 },
+        { name: 'concertImage', maxCount: 1 }]),eventController.updateEvent)
     .delete(eventController.deleteEvent);
 
 // 2) SalesRound Operations:
