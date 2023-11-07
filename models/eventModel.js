@@ -11,6 +11,7 @@ const eventSchema = new mongoose.Schema({
     artistImage: {
         type: String
     },
+    clubId: String,
     concertDescription: {
         type: String,
     },

@@ -42,6 +42,7 @@ const eventController = {
             
             const name = req.body.name;
             const artistName = req.body.artistName;
+            const clubId = req.body.clubId;
             const concertDescription = req.body.concertDescription;
             const categories = req.body.categories;
             const salesRound = req.body.salesRound;
@@ -53,6 +54,7 @@ const eventController = {
                     "name": name,
                     "artistName": artistName,
                     "artistImage": artistImage,
+                    "clubId": clubId,
                     "concertDescription": concertDescription,
                     "concertImage": concertImage,
                     "categories": categories,
@@ -86,6 +88,7 @@ const eventController = {
 
               const name = req.body.name;
               const artistName = req.body.artistName;
+              const clubId = req.body.clubId;
               const concertDescription = req.body.concertDescription;
               const categories = req.body.categories;
               const salesRound = req.body.salesRound;
@@ -97,6 +100,7 @@ const eventController = {
                       "name": name,
                       "artistName": artistName,
                       "artistImage": artistImage,
+                      "clubId": clubId,
                       "concertDescription": concertDescription,
                       "concertImage": concertImage,
                       "categories": categories,
