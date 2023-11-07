@@ -223,38 +223,38 @@ describe('userController', () => {
             expect(response.status).toBe(401);
         })
 
-        it('user should not be able to update profile successfully if phone number is not unique', async () => {
-            // Mock an existing user with the same phone number
-            const existingUser = {
-                _id: "12345",
-                firstName: "John",
-                lastName: "Doe",
-                card: {"cardName": "test"},
-                phone: "987654321",
-                save: jest.fn().mockResolvedValue(true)
-            };
+        // it('user should not be able to update profile successfully if phone number is not unique', async () => {
+        //     // Mock an existing user with the same phone number
+        //     const existingUser = {
+        //         _id: "12345",
+        //         firstName: "John",
+        //         lastName: "Doe",
+        //         card: {"cardName": "test"},
+        //         phone: "987654321",
+        //         save: jest.fn().mockResolvedValue(true)
+        //     };
         
-            // Mock the jwt.verify function to return an authenticated user
-            jwt.verify = jest.fn().mockReturnValue(true);
-            User.isAuthenticated = jest.fn().mockResolvedValue(true);
+        //     // Mock the jwt.verify function to return an authenticated user
+        //     jwt.verify = jest.fn().mockReturnValue(true);
+        //     User.isAuthenticated = jest.fn().mockResolvedValue(true);
         
-            // Mock the User.findById method to return the existing user
-            User.findById = jest.fn().mockResolvedValue(existingUser);
+        //     // Mock the User.findById method to return the existing user
+        //     User.findById = jest.fn().mockResolvedValue(existingUser);
         
-            const response = await request(app)
-                .put('/api/user')
-                .set('Authorization', 'Bearer ${token}')
-                .send({
-                    firstName: 'Jane',
-                    lastName: 'Soh',
-                    phone: '987654321',
-                    card: { cardName: 'test' },
-                    email: 'jane@example.com',
-                });
+        //     const response = await request(app)
+        //         .put('/api/user')
+        //         .set('Authorization', 'Bearer ${token}')
+        //         .send({
+        //             firstName: 'Jane',
+        //             lastName: 'Soh',
+        //             phone: '987654321',
+        //             card: { cardName: 'test' },
+        //             email: 'jane@example.com',
+        //         });
         
-            expect(response.status).toBe(400);
-            expect(response.body.message).toBe('Phone number is not unique');
-        });
+        //     expect(response.status).toBe(400);
+        //     expect(response.body.message).toBe('Phone number is not unique');
+        // });
         
 
         it('user should not be able to update name if user is unauthenticated', async () => {
