@@ -6,8 +6,7 @@ const User = require('../models/userModel');
 
 const userController = {
 
-  
-  register: async (req, res) => {
+    register: async (req, res) => {
     try {
       const { phone, firstName, lastName, email, type } = req.body;
       const user = await User.findOne({ phone });
