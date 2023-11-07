@@ -16,7 +16,6 @@ Usage:
 - **Endpoint**: `http://rt.tixar.sg/api/register`
 - **Body**:
 
-
 Send a `POST` request to `/register` with the following JSON data in the request body:
 ```json
 {
