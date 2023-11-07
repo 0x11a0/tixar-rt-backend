@@ -6,6 +6,7 @@
 4. Ensure Tixar_bot is running
 5. Start express app: `npm run test`
 
+
 # API USAGE
 ## 1. register
 Register a new user with their phone number, first name, and last name.
