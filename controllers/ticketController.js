@@ -25,6 +25,7 @@ const ticketController = {
 
       const newTicket = new Ticket({ 
         datePurchased : Date.now(),
+        event: eventId,
         type: category,
         transaction: transactionId,
         capacity: capacityId,
@@ -43,7 +44,30 @@ const ticketController = {
 
   getUserTickets: async(req, res) => {
     try {
-      const tickets = await Ticket.find({user: req.user._id});
+      const tickets = await Ticket.find({user: req.user._id}).populate([
+        {
+            path: 'event', 
+            select: 'name artistName artistImage concertDescription concertImage sessions',
+        },
+        {
+            path: 'transaction', 
+            populate: {
+                path: '_id',
+                select: 'code value expiry'
+            }
+        }
+    ]);
+
+    tickets.forEach(ticket => {
+      if (ticket.event && ticket.event.sessions) {
+        const specificSession = ticket.event.sessions.find(session => session._id.toString() === ticket.session);
+        if (specificSession) {
+          ticket.event.sessions = specificSession; // Now ticket.event.sessions only contains the specific session
+        } else {
+          ticket.event.sessions = []; // If the session wasn't found, set to an empty array or handle as needed
+        }
+      }
+    });
 
       return res.status(200).json(tickets);
     } catch (err) {
