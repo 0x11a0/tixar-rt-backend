@@ -108,9 +108,7 @@ const userController = {
         }
       }
 
-      var isOtpMatch = false;
-
-      isOtpMatch = await user.compareOtp(otp);
+      const isOtpMatch = await user.compareOtp(otp);
 
       if (!isOtpMatch) {
         user.otpAttempt = user.otpAttempt + 1;
