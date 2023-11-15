@@ -45,9 +45,10 @@ describe('userController', () => {
             // Mock the OTP Generator
             User.findOne = jest.fn().mockResolvedValue({
                 phone: '6592341234',
-                generateOTP: jest.fn().mockReturnValue('sampleOTP'),
+                otpValue: 'sampleOTP',
                 otpExpiry: new Date(Date.now() + 60000),
                 otpLast: Date.now(),
+                otpAttempt: 0,
                 compareOtp: jest.fn().mockResolvedValue(true),
                 generateToken: jest.fn().mockReturnValue('sampleToken'),
                 save: jest.fn().mockResolvedValue(true)

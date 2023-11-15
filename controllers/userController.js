@@ -108,9 +108,9 @@ const userController = {
         }
       }
 
-      isOtpMatch = false;
+      var isOtpMatch = false;
 
-      const isOtpMatch = await user.compareOtp(otp);
+      isOtpMatch = await user.compareOtp(otp);
 
       if (!isOtpMatch) {
         user.otpAttempt = user.otpAttempt + 1;
@@ -122,13 +122,14 @@ const userController = {
       if (user.otpExpiry < Date.now()) {
         return res.status(400).json({ message: "OTP Expired" });
       }
-
+  
       user.otpAttempt = 0;
       const token = await user.generateToken();
       await user.save();
 
       res.status(200).json({ token, message: "Logged in successfully!" });
     } catch (err) {
+      console.log(err);
       res.status(500).json({ message: err.message });
     }
   },
